@@ -1,8 +1,6 @@
 
-
 function searchLocation() {
-    let query = document.getElementById("citySearch").value;
-    // document.getElementById("demo").innerHTML = query;
+    var query = document.getElementById("citySearch").value;
     let locationUrl = 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=' + query;
 
     ajax(locationUrl, function(response){
@@ -14,7 +12,6 @@ function searchLocation() {
 }
 
 function getForecast(woeidNum){
-    
     let forecastUrl = 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/' + woeidNum;
 
     ajax(forecastUrl, function(response){
@@ -23,7 +20,6 @@ function getForecast(woeidNum){
     });
       
 }
-
 
 function ajax(url, callback){
     let xhr = new XMLHttpRequest();
@@ -36,10 +32,9 @@ function ajax(url, callback){
             callback(response);
         }
     }
-  
+    
     xhr.send();
 }
-
 
 function displayResults(forecastAnsmwer){
     let todayF = forecastAnsmwer.consolidated_weather; 
@@ -57,8 +52,6 @@ function displayResults(forecastAnsmwer){
 
         let divEl = document.querySelector(".forecast");
         divEl.innerHTML = "";
-
-        // clearContent();
     
         for (let [index, value] of days.entries()){
             let forecastDivDaily = document.createElement("div"); 
@@ -77,7 +70,6 @@ function displayResults(forecastAnsmwer){
             stateDiv.className = "state";
             highTemp.className = "temp";
             lowTemp.className = "temp";
-            
 
             divEl.appendChild(forecastDivDaily);
             forecastDivDaily.appendChild(iconImage); 
@@ -101,7 +93,6 @@ function displayResults(forecastAnsmwer){
                     forecastDivDaily.style.backgroundColor = colors[4];
             }
                        
-            
             dayDiv.innerHTML = value;
             stateDiv.innerHTML = todayRes.weather_state_name;
             highTemp.innerHTML = Math.round(todayRes.max_temp) + " &#8451";
@@ -111,12 +102,3 @@ function displayResults(forecastAnsmwer){
     }
     
 }
-
-
-
-// function clearContent(){
-//     var elem = document.querySelector("forecastDivDaily");
-//     if (elem) {
-//         elem.remove();
-//     }
-// }
